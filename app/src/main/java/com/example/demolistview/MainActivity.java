@@ -2,6 +2,7 @@ package com.example.demolistview;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -39,9 +40,16 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Food selectedFood = food.get(position);
 
-                Toast.makeText(MainActivity.this,
-                        selectedFood.getName() + " Star: " + selectedFood.isStar(),
-                        Toast.LENGTH_LONG).show();
+//                Toast.makeText(MainActivity.this,
+//                        selectedFood.getName() + " Star: " + selectedFood.isStar(),
+//                        Toast.LENGTH_LONG).show();
+
+                String star = Boolean.toString(selectedFood.isStar());
+                String name = selectedFood.getName();
+                String[] info = {name, star};
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                intent.putExtra("info", info);
+                startActivity(intent);
             }
         });
     }
